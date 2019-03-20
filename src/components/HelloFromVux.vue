@@ -74,7 +74,7 @@ export default {
   },
   created(){
     let _this = this
-    this.$http.post('http://api.apiopen.to/getJok').then(({data}) => {
+    this.$http.post('https://api.apiopen.top/getJoke').then(({data}) => {
       console.log(data)
       var new_data=data.resuit.map((item, index) => ({
         src: item.header,
