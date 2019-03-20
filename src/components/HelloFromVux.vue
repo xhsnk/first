@@ -72,45 +72,27 @@ export default {
       this.$router.push('/Login')
     }
   },
+  created(){
+    let _this = this
+    this.$http.post('http://api.apiopen.to/getJok').then(({data}) => {
+      console.log(data)
+      var new_data=data.resuit.map((item, index) => ({
+        src: item.header,
+        fallbackSrc: item.header,
+        title: item.name,
+        desc: item.text
+      }))
+      console.log(new_data)
+      _this.list = new_data
+    })   
+  }, 
   data () {
     return {
       img_list: urlList,
       img_index: 0,
       msg: 'Hello World!',
       type: '1',
-      list: [{
-        src: 'http://www.zhantengwang.com/uploads/allimg/181016/1-1Q016144920196.jpg',
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-        title: '标题一',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/component/cell'
-      }, {
-        src: 'http://www.zhantengwang.com/uploads/allimg/181016/1-1Q016144920196.jpg',
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-        title: '标题一',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/component/cell'
-      }, {
-        src: 'http://www.zhantengwang.com/uploads/allimg/181016/1-1Q016144920196.jpg',
-        fallbackSrc: 'http://placeholder.qiniudn.com/60x60/3cc51f/ffffff',
-        title: '标题一',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: '/component/cell'
-      }, {
-        src: 'http://www.zhantengwang.com/uploads/allimg/181016/1-1Q016144920196.jpg',
-        title: '标题二',
-        desc: '由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。',
-        url: {
-          path: '/component/radio',
-          replace: false
-        },
-        meta: {
-          source: '来源信息',
-          date: '时间',
-          other: '其他信息'
-          // iconType: '',
-        }
-      }],
+      list: [],
       footer: {
         title: '更多',
         url: 'http://vux.li'
